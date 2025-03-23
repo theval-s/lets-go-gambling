@@ -55,7 +55,7 @@ jobs:
         echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
     - name: Install dependencies (Linux)
       if: matrix.os == 'ubuntu-latest'
-      run: sudo apt-get update && sudo apt-get install -y libx11-dev
+      run: sudo apt-get update && sudo apt-get install -y libx11-dev libxrandr-dev libxcursor-dev libxi-dev
 
     - name: Configure CMake
       # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
@@ -73,10 +73,10 @@ jobs:
 
     - name: Package binary and resources
       run: |
-        mkdir release
-        cp ${{steps.strings.outputs.build-output-dir }}/OGGTest ./release/
-        cp -r resources ./release/
-        tar -czvf release.tar.gz -C release
+        mkdir packaged
+        cp ${{steps.strings.outputs.build-output-dir }}/OGGTest ./packaged/
+        cp -r resources ./packaged/
+        tar -czvf release.tar.gz -C packaged
 
     - name: Upload release artifact
       uses: actions/upload-artifact@v4
