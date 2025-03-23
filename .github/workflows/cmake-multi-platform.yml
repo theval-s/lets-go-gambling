@@ -73,8 +73,9 @@ jobs:
 
     - name: Package binary and resources
       run: |
+        ls ${{ github.workspace }}
         mkdir packaged
-        cp ${{steps.strings.outputs.build-output-dir }}/OGGTest ./packaged/
+        cp ${{ github.workspace }}/OGGTest ./packaged/
         cp -r resources ./packaged/
         tar -czvf release.tar.gz -C packaged
 
