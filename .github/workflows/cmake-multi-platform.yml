@@ -73,10 +73,12 @@ jobs:
 
     - name: Package binary and resources
       run: |
+        pwd
         ls ${{ github.workspace }}
+        ls ${{ github.workspace }}/build/OGGTest
         mkdir packaged
-        cp ${{ github.workspace }}/OGGTest ./packaged/
-        cp -r resources ./packaged/
+        cp ${{ github.workspace }}/packaged/
+        cp -r ${{ github.workspace }}resources ./packaged/
         tar -czvf release.tar.gz -C packaged
 
     - name: Upload release artifact
