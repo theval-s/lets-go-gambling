@@ -71,18 +71,36 @@ jobs:
       # Build your program with the given configuration. Note that --config is needed because the default Windows generator is a multi-config generator (Visual Studio generator).
       run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
 
-    - name: Package binary and resources
+    - name: Package binary and resources (Linux)
+      if: matrix.os == 'ubuntu-latest'
       run: |
-        pwd
         ls ${{ github.workspace }}
-        ls ${{ github.workspace }}/build/OGGTest
+        ls ${{ github.workspace }}/build/
         mkdir packaged
-        cp ${{ github.workspace }}/packaged/
-        cp -r ${{ github.workspace }}resources ./packaged/
+        cp ${{ github.workspace }}/OGGTest
+        cp -r ${{ github.workspace }}/resources ./packaged/
         tar -czvf release.tar.gz -C packaged
+    - name: Package binary and resources (Windows)
+      if: matrix.os == 'windows-latest'
+      run: |
+        ls ${{ github.workspace }}
+        ls ${{ github.workspace }}/build/
+        mkdir packaged
+        cp ${{ github.workspace }}/build/OGGTest.exe
+        cp -r ${{ github.workspace }}/resources ./packaged/
+        Compress-Archive -Path ./packaged/ -Destination release.zip
+      
 
-    - name: Upload release artifact
+    - name: Upload release artifact (Linux)
+      if: matrix.os == 'ubuntu-latest'
       uses: actions/upload-artifact@v4
       with:
         name: release-package
         path: release.tar.gz
+        
+    - name: Upload release artifact (Windows)
+      if: matrix.os == 'windows-latest'
+      uses: actions/upload-artifact@v4
+      with:
+        name: release-package
+        path: release.zip
