@@ -77,13 +77,14 @@ jobs:
         mkdir packaged
         cp ${{ github.workspace }}/OGGTest ./packaged/
         cp -r ${{ github.workspace }}/resources ./packaged/
-        tar -czvf release.tar.gz -C packaged
+        ls ./packaged/
+        tar -czvf release.tar.gz -C ./packaged
     - name: Package binary and resources (Windows)
       if: matrix.os == 'windows-latest'
       run: |
         tree ${{ github.workspace }}/build/
         mkdir packaged
-        cp ${{ github.workspace }}/build/OGGTest.exe ./packaged
+        cp ${{ github.workspace }}/Release/OGGTest.exe ./packaged
         cp -r ${{ github.workspace }}/resources ./packaged/
         Compress-Archive -Path ./packaged/ -Destination release.zip
       
