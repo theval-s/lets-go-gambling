@@ -78,7 +78,7 @@ jobs:
         cp ${{ github.workspace }}/OGGTest ./packaged/
         cp -r ${{ github.workspace }}/resources ./packaged/
         ls ./packaged/
-        tar -czvf release.tar.gz -C ./packaged
+        tar -czvf release.tar.gz ./packaged
     - name: Package binary and resources (Windows)
       if: matrix.os == 'windows-latest'
       run: |
@@ -94,11 +94,11 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: release-package
-        path: release.tar.gz
+        path: ./packaged
         
     - name: Upload release artifact (Windows)
       if: matrix.os == 'windows-latest'
       uses: actions/upload-artifact@v4
       with:
         name: release-package
-        path: release.zip
+        path: ./packaged
