@@ -9,6 +9,7 @@
 #include "slot_reel.hpp"
 #include "slot_view.hpp"
 #include "config_values.hpp"
+#include "winning_line.hpp"
 
 namespace SlotMachine {
     /// Main class for slot machine. Stores reels, renderer, bounds for rendering view
@@ -19,6 +20,9 @@ namespace SlotMachine {
         //sf::View machineView;
         sf::FloatRect bounds;
         int winningPos = Config::DISPLAYED_SYMBOL_AMOUNT / 2;
+        std::vector<WinningLine> winningLines;
+
+        void initWinningLines();
 
     public:
         Machine() = delete;
@@ -61,6 +65,13 @@ namespace SlotMachine {
         /// Generates new reels
         void regenerateReels() {
             reels = std::vector<SlotReel>(reels.size());
+        }
+
+        void setWinningLines(const std::vector<WinningLine> &winningLines) {
+            this->winningLines = winningLines;
+        }
+        void disableWinState() {
+            for (auto& line : winningLines) line.disableWinState();
         }
     };
 }

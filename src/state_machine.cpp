@@ -68,12 +68,13 @@ void ResultState::update(float deltaTime, SlotMachine::Machine &slots) {
 
 void ResultState::handleInput(SlotMachine::Machine &slots) {
     if (Config::REGENERATE_SLOTS) slots.regenerateReels();
+    slots.disableWinState();
     if (game->isPlayButtonClicked()) {
         game->changeState(std::make_unique<SpinState>(game,slots));
-    } else game->changeState(std::make_unique<StartState>(game));
+    }
+    else game->changeState(std::make_unique<StartState>(game));
 }
 
 void ResultState::render(sf::RenderWindow &window, SlotMachine::Machine &slots) {
     slots.render(window);
-    //Display lines that won?
 }

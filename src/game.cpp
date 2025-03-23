@@ -4,9 +4,9 @@
 
 #include "game.hpp"
 #include <memory>
+#include <iostream>
 
 RectButton Game::createPlayButton(const float &xpos, const float &ypos, const float &w, const float &h) {
-    float xPos = Config::DEFAULT_TOTAL_SLOT_WIDTH + 2 * Config::SPACING;
     std::unique_ptr<sf::Shape> icon = std::make_unique<sf::CircleShape>(sf::CircleShape(h / 2, 3));
     icon->setFillColor(Config::BUTTON_PLAY_COLOR);
     icon->setRotation(sf::degrees(90));

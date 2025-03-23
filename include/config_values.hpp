@@ -12,12 +12,12 @@ namespace Config {
     //constexpr float REEL_HEIGHT = 500.f;
     constexpr int DEFAULT_REEL_AMOUNT = 5;
     constexpr float DEFAULT_TOTAL_SLOT_WIDTH = DEFAULT_REEL_AMOUNT * REEL_WIDTH;
-    constexpr int DEFAULT_SYMBOL_AMOUNT = 42;
+    constexpr int DEFAULT_SYMBOL_AMOUNT = 20;
     constexpr int DISPLAYED_SYMBOL_AMOUNT = 5;
     //constexpr float SYMBOL_SIZE = REEL_HEIGHT / DISPLAYED_SYMBOL_AMOUNT;
     constexpr float SYMBOL_SIZE = 100.f;
     constexpr float REEL_HEIGHT = SYMBOL_SIZE*DISPLAYED_SYMBOL_AMOUNT;
-    constexpr bool REGENERATE_SLOTS = true;
+    constexpr bool REGENERATE_SLOTS = false;
 
 
     constexpr float BUTTON_WIDTH = 100.f;

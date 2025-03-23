@@ -2,11 +2,19 @@
 // Created by val on 3/19/25.
 //
 
-#include "slot_machine/slot_machine.hpp"
+#include "slot_machine.hpp"
 
 #include "config_values.hpp"
 
+void SlotMachine::Machine::initWinningLines() {
+    //std::vector<SlotMachine::WinningLine> winningLines;
+    size_t middlePos = Config::DISPLAYED_SYMBOL_AMOUNT / 2;
+    winningLines.emplace_back(middlePos);
+    winningLines.emplace_back(std::vector<size_t>({middlePos, middlePos+1, middlePos-1}));
+}
+
 SlotMachine::Machine::Machine(sf::FloatRect bounds, const size_t &reelCount) : reels(reelCount), bounds(bounds) {
+    initWinningLines();
 }
 
 int SlotMachine::Machine::calculateWin() {
@@ -14,15 +22,16 @@ int SlotMachine::Machine::calculateWin() {
     //Win is calculated based on amount of symbols encountered, but only if symbol is encountered at least reels.size()/2
     //Only combination of at least 2 same symbols is scored
     int res = 0;
-    std::array<int, static_cast<int>(ESlotSymbolType::TypesCount)> count = {};
-    for (auto &reel: reels) {
-        ESlotSymbolType type = reel.getSymbol(reel.getPosition() + winningPos).getType();
-        count[static_cast<int>(type)]++;
-    }
-    for (int i = 0; i < count.size(); i++) {
-        //ESlotSymbolType type = ;
-        if (count[i] > reels.size()/2) res += count[i] * SymbolTypeToValueMap.at(static_cast<ESlotSymbolType>(i));
-    }
+    // std::array<int, static_cast<int>(ESlotSymbolType::TypesCount)> count = {};
+    // for (auto &reel: reels) {
+    //     ESlotSymbolType type = reel.getSymbol(reel.getPosition() + winningPos).getType();
+    //     count[static_cast<int>(type)]++;
+    // }
+    // for (int i = 0; i < count.size(); i++) {
+    //     //ESlotSymbolType type = ;
+    //     if (count[i] > reels.size()/2) res += count[i] * SymbolTypeToValueMap.at(static_cast<ESlotSymbolType>(i));
+    // }
+    for (auto& line: winningLines) { res+=line.calculateWin(reels); }
     return res;
 }
 
@@ -53,8 +62,8 @@ void SlotMachine::Machine::render(sf::RenderTarget &target) {
     });
     target.setView(machineView);
     slotView.render(target, reels);
+    for (auto& line: winningLines) {line.draw(target, reels);}
     target.setView(originalView);
-
     drawMachineBorder(target);
     drawWinningBorder(target);
 }

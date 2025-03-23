@@ -20,7 +20,8 @@ add_executable(OGGTest src/main.cpp
         src/rect_button.cpp
         src/slot_machine/slot_reel.cpp
         src/slot_machine/slot_symbol.cpp
-        src/slot_machine/slot_view.cpp)
+        src/slot_machine/slot_view.cpp
+        src/slot_machine/winning_line.cpp)
 target_include_directories(OGGTest PRIVATE include include/slot_machine)
 target_link_libraries(OGGTest SFML::Graphics)
 
