@@ -3,3 +3,6 @@ cmake-build-debug
 OGGTest
 .idea
 /.vs
+/OGGTest.exe
+/OGGTest.ilk
+/OGGTest.pdb
