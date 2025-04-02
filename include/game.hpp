@@ -36,7 +36,7 @@ private:
     /// @param w width of a resulting button
     /// @param h height of a resulting button
     /// @return created button
-    static RectButton createPlayButton(const float &xpos, const float &ypos, const float &w, const float &h);
+    static RectButton createPlayButton( float xpos,  float ypos,  float w,  float h);
 
     /// @brief creates a button with a green triangle inside
     /// @param xpos x position of a resulting button
@@ -44,7 +44,7 @@ private:
     /// @param w width of a resulting button
     /// @param h height of a resulting button
     /// @return created button
-    static RectButton createStopButton(const float &xpos, const float &ypos, const float &w, const float &h);
+    static RectButton createStopButton( float xpos,  float ypos,  float w,  float h);
     void updateScoreText();
 
 public:
@@ -57,7 +57,7 @@ public:
     };
 
 
-    Game(const unsigned int &windowWidth, const unsigned int &windowHeight);
+    Game(unsigned int windowWidth, unsigned int windowHeight);
 
     /// Calls StateMachine's changeState
     void changeState(std::unique_ptr<IState> newState) {

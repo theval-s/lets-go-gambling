@@ -18,8 +18,6 @@ public:
     virtual void update(float deltaTime, SlotMachine::Machine &slots) = 0;
 
     virtual void handleInput(SlotMachine::Machine &slots) = 0;
-
-    virtual void render(sf::RenderWindow &window, SlotMachine::Machine &slots) = 0;
 };
 
 class StateMachine {
@@ -36,7 +34,6 @@ public:
 
     void update(float deltaTime, SlotMachine::Machine &slots) { currentState->update(deltaTime, slots); }
     void handleInput(SlotMachine::Machine &slots) { currentState->handleInput(slots); }
-    void render(sf::RenderWindow &window, SlotMachine::Machine &slots) { currentState->render(window, slots); }
 };
 
 class Game; //forward decl
@@ -56,8 +53,6 @@ public:
     void update(float deltaTime, SlotMachine::Machine &slots) override;
 
     void handleInput(SlotMachine::Machine &slots) override;
-
-    void render(sf::RenderWindow &window, SlotMachine::Machine &slots) override;
 };
 
 class SpinState : public IState {
@@ -83,8 +78,6 @@ public:
     void update(float deltaTime, SlotMachine::Machine &slots) override;
 
     void handleInput(SlotMachine::Machine &slots) override;
-
-    void render(sf::RenderWindow &window, SlotMachine::Machine &slots) override;
 };
 
 class ResultState : public IState {
@@ -99,6 +92,4 @@ public:
     void update(float deltaTime, SlotMachine::Machine &slots) override;
 
     void handleInput(SlotMachine::Machine &slots) override;
-
-    void render(sf::RenderWindow &window, SlotMachine::Machine &slots) override;
 };

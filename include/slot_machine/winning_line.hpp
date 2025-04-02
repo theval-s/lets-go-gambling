@@ -28,10 +28,10 @@ private:
     sf::VertexArray line;
     bool lineInitialized = false;
 
-    void initializeLine(const size_t &reelCount, const sf::Vector2f &boundsPos);
+    void initializeLine(size_t reelCount, const sf::Vector2f &boundsPos);
 
 public:
-    explicit WinningLine(const size_t &pos, sf::Color lineColor=sf::Color::Black) : pattern(1,pos), color(lineColor) {
+    explicit WinningLine(size_t pos, const sf::Color &lineColor=sf::Color::Black) : pattern(1,pos), color(lineColor) {
     }
 
     explicit WinningLine(const std::vector<size_t> &pattern, sf::Color lineColor=sf::Color::Black) : pattern(pattern), color(lineColor){};

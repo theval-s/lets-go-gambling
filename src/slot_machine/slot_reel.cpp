@@ -26,7 +26,7 @@ namespace SlotMachine {
         }
     }
 
-    SlotReel::SlotReel(const int &amount) {
+    SlotReel::SlotReel(int amount) {
         initializeSymbols(amount);
         if (Config::RANDOMIZE_SPIN_SPEED) {
             this->spinSpeed = RandomGen::getRandomSpinSpeed();

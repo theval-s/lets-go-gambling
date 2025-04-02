@@ -5,6 +5,7 @@
 #pragma once
 
 #include <vector>
+#include <limits>
 #include "slot_symbol.hpp"
 #include "config_values.hpp"
 
@@ -17,19 +18,19 @@ namespace SlotMachine {
 
         ///Current position is corresponding to index of the current topmost symbol, but fractional
         float currentPosition = 0;
-        int stopTarget = 1e9;
+        int stopTarget = std::numeric_limits<int>::max();
 
         void initializeSymbols(const int &amount);
 
     public:
         SlotReel();
 
-        SlotReel(const int &amount);
+        SlotReel(int amount);
 
         /// Starts spinning until stopSpinning() gets called
         void startSpinning() {
             spinning = true;
-            stopTarget = 1e9;
+            stopTarget = std::numeric_limits<int>::max();
         }
 
         /// Spins to the next position and then sets spinning=false

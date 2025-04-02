@@ -23,10 +23,6 @@ void StartState::handleInput(SlotMachine::Machine &slots) {
     }
 }
 
-void StartState::render(sf::RenderWindow &window, SlotMachine::Machine &slots) {
-    slots.render(window);
-}
-
 
 ////////////////////////////////////////////////////////
 // SpinState
@@ -46,10 +42,6 @@ void SpinState::handleInput(SlotMachine::Machine &slots) {
         isSpinning = false;
         slots.stopSpinning();
     }
-}
-
-void SpinState::render(sf::RenderWindow &window, SlotMachine::Machine &slots) {
-    slots.render(window);
 }
 
 
@@ -73,8 +65,4 @@ void ResultState::handleInput(SlotMachine::Machine &slots) {
         game->changeState(std::make_unique<SpinState>(game,slots));
     }
     else game->changeState(std::make_unique<StartState>(game));
-}
-
-void ResultState::render(sf::RenderWindow &window, SlotMachine::Machine &slots) {
-    slots.render(window);
 }

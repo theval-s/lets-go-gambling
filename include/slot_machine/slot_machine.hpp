@@ -17,7 +17,6 @@ namespace SlotMachine {
     private:
         std::vector<SlotReel> reels;
         SlotView slotView;
-        //sf::View machineView;
         sf::FloatRect bounds;
         int winningPos = Config::DISPLAYED_SYMBOL_AMOUNT / 2;
         std::vector<WinningLine> winningLines;
@@ -27,7 +26,7 @@ namespace SlotMachine {
     public:
         Machine() = delete;
 
-        Machine(sf::FloatRect bounds, const size_t &reelCount);
+        Machine(const sf::FloatRect &bounds, size_t reelCount);
 
         void spin(float duration) {
             for (auto &reel: reels) {

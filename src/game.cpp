@@ -6,7 +6,7 @@
 #include <memory>
 #include <iostream>
 
-RectButton Game::createPlayButton(const float &xpos, const float &ypos, const float &w, const float &h) {
+RectButton Game::createPlayButton(float xpos, float ypos, float w, float h) {
     std::unique_ptr<sf::Shape> icon = std::make_unique<sf::CircleShape>(sf::CircleShape(h / 2, 3));
     icon->setFillColor(Config::BUTTON_PLAY_COLOR);
     icon->setRotation(sf::degrees(90));
@@ -14,7 +14,7 @@ RectButton Game::createPlayButton(const float &xpos, const float &ypos, const fl
     return RectButton(RectButton(std::move(icon), xpos, ypos, w, h));
 }
 
-RectButton Game::createStopButton(const float &xpos, const float &ypos, const float &w, const float &h) {
+RectButton Game::createStopButton(float xpos, float ypos, float w, float h) {
     //TODO: For more customizable UI positions check if h is bigger than w?
     std::unique_ptr<sf::Shape> icon = std::make_unique<sf::RectangleShape>(sf::RectangleShape({
         h / 4 * 3, h / 4 * 3 // Square inside, 75% of the button height
@@ -28,7 +28,7 @@ void Game::updateScoreText() {
     scoreText.setString("Score: " + std::to_string(score));
 }
 
-Game::Game(const unsigned int &windowWidth, const unsigned int &windowHeight)
+Game::Game(unsigned int windowWidth, unsigned int windowHeight)
     : window(sf::VideoMode({windowWidth, windowHeight}), "OGG Test Game")
       , slots(sf::FloatRect(
                   {Config::SPACING, Config::SPACING},
@@ -73,9 +73,8 @@ void Game::run() {
 
         window.clear(sf::Color::White); //Possible to delegate it to Config::
         currentState.update(deltaTime, slots);
-        currentState.render(window, slots);
-
-        window.draw(playButton); //Might be worthwhile to extract into separate method for scalability?
+        slots.render(window);
+        window.draw(playButton);
         window.draw(stopButton);
         window.draw(scoreText);
         window.display();

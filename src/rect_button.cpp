@@ -10,8 +10,8 @@
 #include "SFML/Graphics/Shape.hpp"
 #include "config_values.hpp"
 
-RectButton::RectButton(std::unique_ptr<sf::Shape> icon, const float &x, const float &y, const float &w,
-                       const float &h) : icon(std::move(icon)) {
+RectButton::RectButton(std::unique_ptr<sf::Shape> icon, float x, float y, float w,
+                       float h) : icon(std::move(icon)) {
     base = std::make_unique<sf::RectangleShape>(sf::RectangleShape({w, h}));
     base->setPosition({x, y});
     base->setOutlineColor(Config::BUTTON_OUTLINE_COLOR);

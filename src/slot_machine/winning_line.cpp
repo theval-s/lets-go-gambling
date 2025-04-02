@@ -7,7 +7,7 @@
 #include <array>
 
 namespace SlotMachine {
-    void WinningLine::initializeLine(const size_t &reelCount, const sf::Vector2f &boundsPos) {
+    void WinningLine::initializeLine(size_t reelCount, const sf::Vector2f &boundsPos) {
         //If line is straight only it can be drawn as a rectangle but diagonal lines are supported too
         //So VertexArray is needed
         line = sf::VertexArray(sf::PrimitiveType::LineStrip, reelCount);
